@@ -13,5 +13,6 @@
   },
   "devDependencies": {},
   "author": "Canonical Online Services",
+  "repository": "https://github.com/squidsoup/ubuntu-store-help",
   "license": "AGPL-3.0"
 }
