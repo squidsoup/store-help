@@ -1,9 +1,13 @@
 build: node_modules
-	@echo "Running Metalsmith build..."
-	@node_modules/.bin/metalsmith
+	@echo "Running build..."
+	@node build
 
 node_modules: package.json
 	@echo "Installing packages..."
 	@npm install
 
-.PHONY: build
+clean:
+	@echo "Cleaning..."
+	rm -rf build
+
+.PHONY: build clean
