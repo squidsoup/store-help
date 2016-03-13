@@ -1,5 +1,5 @@
-Ubuntu Store Help
-=================
+Ubuntu Store Help Site
+======================
 
 # Getting started
 
@@ -15,3 +15,9 @@ Ubuntu Store Help
 ## Build the Site
 
     make build
+
+## Develop
+
+The following task will watch source files and rebuild the site for you:
+
+    make watch
