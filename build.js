@@ -11,6 +11,11 @@ var opts = {}
 // Set to 'true' to watch source files and build.
 opts.watch = false;
 
+var argv = require('yargs').argv;
+if (argv.watch == 'true') {
+  opts.watch = argv.watch;
+}
+
 Metalsmith(__dirname)
   .source('./src')
   .destination('./build')
