@@ -22,4 +22,4 @@ fetch_snapcraft_docs: clean
 	@git clone https://github.com/ubuntu-core/snapcraft/ tmp/snapcraft
 	@cp -r tmp/snapcraft/docs content/snapcraft/
 
-.PHONY: build watch clean
+.PHONY: build watch fetch_snapcraft_docs clean
