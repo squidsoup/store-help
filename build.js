@@ -3,6 +3,13 @@ var blc = require('metalsmith-broken-link-checker');
 var collections = require('metalsmith-collections');
 var markdown = require('metalsmith-markdown');
 var layouts = require('metalsmith-layouts');
+var msIf = require('metalsmith-if');
+var watch = require('metalsmith-watch');
+
+
+var opts = {}
+// Set to 'true' to watch source files and build.
+opts.watch = false;
 
 Metalsmith(__dirname)
   .source('./src')
@@ -20,6 +27,14 @@ Metalsmith(__dirname)
   .use(layouts({
     engine: 'handlebars'
   }))
+  .use(msIf(
+    opts.watch,
+    watch({
+    paths: {
+      "${source}/**/*": true,
+      "layouts/**/*": "**/*"
+    }
+  })))
   .build(function(err) {
     if (err) throw err;
     console.log('Build Completed.');
