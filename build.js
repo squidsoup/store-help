@@ -8,7 +8,6 @@ var watch = require('metalsmith-watch');
 
 
 var opts = {}
-// Set to 'true' to watch source files and build.
 opts.watch = false;
 
 var argv = require('yargs').argv;
