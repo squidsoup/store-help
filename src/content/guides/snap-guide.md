@@ -1,7 +1,7 @@
 ---
 title: Snap Guide
 description: Learn to build Snaps using Snapcraft
-collection: guides
+layout: index.html
 ---
 
 # Building your snap

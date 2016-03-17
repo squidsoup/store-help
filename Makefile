@@ -1,4 +1,4 @@
-build: node_modules
+build: node_modules 
 	@echo "Running build..."
 	@node build
 
@@ -14,12 +14,12 @@ clean:
 	@echo "Cleaning..."
 	rm -rf build
 	rm -rf tmp
-	rm -rf content/snapcraft/
+	rm -rf src/content/snapcraft/
 
 fetch_snapcraft_docs: clean
 	@echo "Fetching latest snapcraft docs..."
 	@mkdir -p tmp
 	@git clone https://github.com/ubuntu-core/snapcraft/ tmp/snapcraft
-	@cp -r tmp/snapcraft/docs content/snapcraft/
+	@cp -r tmp/snapcraft/docs src/content/snapcraft/
 
 .PHONY: build watch fetch_snapcraft_docs clean
