@@ -1,6 +1,8 @@
 Ubuntu Store Help Site
 ======================
 
+![Ubuntu](src/img/ubuntu-logo.png)
+
 # Getting started
 
 ## Installing Nodejs/NPM
