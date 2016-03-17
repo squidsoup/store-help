@@ -18,5 +18,5 @@ node_modules
 # Project
 build/
 tmp/
-content/snapcraft/
+src/content/snapcraft/
 
