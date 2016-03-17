@@ -7,12 +7,7 @@ const prependFile = require('prepend-file');
 const walk = require('walk');
 const fs = require('fs');
 const path = require('path');
-if (require.main === module) {
-  var argv = require('yargs')
-               .usage('Usage: $0 --path path_to_markdown_files_to_frontmatterise')
-               .demand('path')
-               .argv;
-}
+
 let files = [];
 
 function generateFrontmatter(filename) {
@@ -52,6 +47,10 @@ function errorsHandler(root, nodeStatsArray, next) {
 }
 
 if (require.main === module) {
+  var argv = require('yargs')
+               .usage('Usage: $0 --path path_to_markdown_files_to_frontmatterise')
+               .demand('path')
+               .argv;
   let walker = walk.walk(argv.path, { followLinks: false })
 
   walker.on('file', fileHandler);
