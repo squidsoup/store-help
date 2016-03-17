@@ -1,0 +1,25 @@
+.b-footer {
+    box-sizing: border-box;
+    bottom: 0;
+    height: 40px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    border-top: 1px solid #efefef;
+    font-size: 12px;
+    background-color: #fff
+}
+
+.nav {
+    float: left;
+    width: 230px;
+    font-size: 90%;
+    background: #F2F1F0;
+}
+
+.content {
+    padding: 1.5em 3em;
+    height: 100%;
+    max-width: 800px;
+    margin: auto
+}

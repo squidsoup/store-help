@@ -1,17 +1,36 @@
 <html>
 <head>
-  <title>{{ title }}</title>
+  <title>{{title}}</title>
   <meta name="description" content="{{ description }}">
+  <link rel="stylesheet" type="text/css" href="{{rootPath}}css/style.css">
 </head>
 <body>
   <header>
-    <h1>{{ title }}</h1>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <hr>
+      Guides
+      <ul>
+        {{#each collections.Guides}}
+        <li>{{name}}
+          <a href="/{{ path }}">{{ title }}</a>
+        </li>
+        {{/each}}
+      </ul>
+      <hr>
+      Snapcraft
+      <ul>
+        {{#each collections.Snapcraft}}
+        <li>{{name}}
+          <a href="{{ path }}">{{ @key }}</a>
+        </li>
+        {{/each}}
+      </ul>
   </header>
-  <aside>
-    Side panel
-  </aside>
-  <section>
-    <p>{{{ contents }}}</p>
+  <section class="content">
+    <h1>{{title}}</h1>
+    <p>{{{contents}}}</p>
   </section>
+  {{> footer}}
 </body>
 </html>

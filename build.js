@@ -1,11 +1,12 @@
 var Metalsmith = require('metalsmith');
 var blc = require('metalsmith-broken-link-checker');
 var collections = require('metalsmith-collections');
+var permalinks  = require('metalsmith-permalinks');
 var markdown = require('metalsmith-markdown');
 var layouts = require('metalsmith-layouts');
 var msIf = require('metalsmith-if');
 var watch = require('metalsmith-watch');
-
+var rootPath = require('metalsmith-rootpath');
 
 var opts = {}
 opts.watch = false;
@@ -18,25 +19,37 @@ if (argv.watch == 'true') {
 Metalsmith(__dirname)
   .source('./src')
   .destination('./build')
-  .use(markdown())
-  .use(blc())
+  .use(rootPath())
   .use(collections({
-    Guides: {
-      pattern: 'guides/*.md'
+    Home: {
+      pattern: ''
     },
-    Api: {
-      pattern: 'api/*.md'
+    Guides: {
+      pattern: 'content/guides/*.md'
+    },
+    Snapcraft: {
+      pattern: 'content/snapcraft/*.md'
     }
   }))
-  .use(layouts({
-    engine: 'handlebars'
+  .use(markdown({
+    gfm: true
   }))
+  .use(permalinks({
+    pattern: ':title'
+  }))
+  .use(layouts({
+    engine: 'handlebars',
+    directory: 'layouts',
+    partials: 'partials'
+  }))
+  .use(blc({warn: true}))
   .use(msIf(
     opts.watch,
     watch({
     paths: {
-      "${source}/**/*": true,
-      "layouts/**/*": "**/*"
+      "${source}/**/*": "**/*",
+      "layouts/**/*": "**/*",
+      "partials/**/*": "**/*"
     }
   })))
   .build(function(err) {
