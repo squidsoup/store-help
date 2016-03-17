@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Help and Guides for the Ubuntu Store.",
   "dependencies": {
+    "async": "^1.5.2",
     "change-case": "^2.3.1",
     "handlebars": "^4.0.5",
     "jasmine-node": "^1.14.5",
