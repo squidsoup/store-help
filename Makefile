@@ -25,6 +25,6 @@ fetch_snapcraft_docs: clean
 	@node scripts/frontmatterise.js --path=src/content/snapcraft
 
 test:
-	@jasmine-node scripts/specs
+	@npm run test
 
 .PHONY: build watch fetch_snapcraft_docs clean test

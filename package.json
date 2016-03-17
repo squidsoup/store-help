@@ -21,6 +21,9 @@
     "yargs": "^4.2.0"
   },
   "devDependencies": {},
+  "scripts": {
+    "test": "jasmine-node scripts/specs"
+  },
   "author": "Canonical Online Services",
   "repository": "https://github.com/squidsoup/ubuntu-store-help",
   "license": "AGPL-3.0"
