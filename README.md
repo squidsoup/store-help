@@ -3,7 +3,7 @@ Ubuntu Store Help Site
 
 ![Ubuntu](src/img/ubuntu-logo.png)
 
-This site provides documentation for the ![Ubuntu Store](https://myapps.developer.ubuntu.com).
+This site provides documentation for the [Ubuntu Store](https://myapps.developer.ubuntu.com).
 
 # Getting started
 
