@@ -11,15 +11,25 @@ const yargs = require('yargs');
 
 let files = [];
 
-function generateFrontmatter(filename) {
-  let title = changeCase.titleCase(filename.replace(/-/g, ' '));
-  return `---\ntitle: ${title}\n---\n\n`;
+function generateFrontmatter(filename, options) {
+  const head = '---';
+  const tail = '---\n\n';
+  let title = 'title: ' + changeCase.titleCase(filename.replace(/-/g, ' '));
+
+  if (options && Object.keys(options).length != 0) {
+    let optionRows = [];
+    Object.keys(options).forEach(function(key) {
+      optionRows.push(`${key}: ${options[key]}`);
+    });
+    return [head, title, optionRows.join('\n'), tail].join('\n')
+  }
+  return [head, title, tail].join('\n')
 }
 
-function annotateFiles(files, callback) {
+function annotateFiles(files, options, callback) {
   for (let file of files) {
     let basename = path.parse(path.basename(file)).name;
-    let frontmatter = generateFrontmatter(basename);
+    let frontmatter = generateFrontmatter(basename, options);
     prependFile(file, frontmatter, function(err) {
       if (err) {
         console.error('[ERROR] ' + err);
@@ -49,15 +59,19 @@ function errorsHandler(root, nodeStatsArray, next) {
 
 if (require.main === module) {
   let argv = yargs
-               .usage('Usage: $0 --path path_to_markdown_files_to_frontmatterise')
-               .demand('path')
-               .argv;
+             .usage('Usage: $0 --path path_to_markdown_files_to_frontmatterise --layout layout_file')
+             .demand('path')
+             .argv;
   let walker = walk.walk(argv.path, { followLinks: false });
+  let options = {}
 
+  if (argv.layout) {
+    options['layout'] = argv.layout
+  }
   walker.on('file', fileHandler);
   walker.on('errors', errorsHandler);
   walker.on('end', function() {
-    annotateFiles(files);
+    annotateFiles(files, options);
     console.log('Done.');
   })
 }
