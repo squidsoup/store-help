@@ -7,6 +7,7 @@ var layouts = require('metalsmith-layouts');
 var msIf = require('metalsmith-if');
 var watch = require('metalsmith-watch');
 var rootPath = require('metalsmith-rootpath');
+const sorter = require('./sorter').sorter;
 
 var opts = {}
 opts.watch = false;
@@ -28,7 +29,19 @@ Metalsmith(__dirname)
       pattern: 'content/guides/*.md'
     },
     Snapcraft: {
-      pattern: 'content/snapcraft/*.md'
+      pattern: 'content/snapcraft/*.md',
+      sortBy: sorter([
+        'Intro',
+        'Get Started',
+        'Your First Snap',
+        'Snapcraft Advanced Features',
+        'Snapcraft Usage',
+        'Snapcraft Parts',
+        'Snapcraft Syntax',
+        'Debug',
+        'Metadata',
+        'Plugins'
+      ])
     }
   }))
   .use(markdown({
