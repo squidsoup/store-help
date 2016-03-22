@@ -26,9 +26,6 @@ Metalsmith(__dirname)
     },
     Guides: {
       pattern: 'content/guides/*.md'
-    },
-    Snapcraft: {
-      pattern: 'content/snapcraft/*.md'
     }
   }))
   .use(markdown({
