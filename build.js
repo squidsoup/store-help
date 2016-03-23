@@ -1,18 +1,21 @@
-var Metalsmith = require('metalsmith');
-var blc = require('metalsmith-broken-link-checker');
-var collections = require('metalsmith-collections');
-const drafts = require('metalsmith-drafts');
-var permalinks  = require('metalsmith-permalinks');
-var markdown = require('metalsmith-markdown');
-var layouts = require('metalsmith-layouts');
-var msIf = require('metalsmith-if');
-var watch = require('metalsmith-watch');
-var rootPath = require('metalsmith-rootpath');
+'use strict';
 
-var opts = {}
+const Metalsmith = require('metalsmith');
+const blc = require('metalsmith-broken-link-checker');
+const collections = require('metalsmith-collections');
+const drafts = require('metalsmith-drafts');
+const layouts = require('metalsmith-layouts');
+const markdown = require('metalsmith-markdown');
+const msIf = require('metalsmith-if');
+const permalinks  = require('metalsmith-permalinks');
+const rootPath = require('metalsmith-rootpath');
+const watch = require('metalsmith-watch');
+
+let opts = {};
+let argv = require('yargs').argv;
+
 opts.watch = false;
 
-var argv = require('yargs').argv;
 if (argv.watch == 'true') {
   opts.watch = argv.watch;
 }
@@ -48,14 +51,13 @@ Metalsmith(__dirname)
   .use(msIf(
     opts.watch,
     watch({
-    paths: {
-      "${source}/**/*": "**/*",
-      "layouts/**/*": "**/*",
-      "partials/**/*": "**/*"
-    }
-  })))
+      paths: {
+        '${source}/**/*': '**/*',
+        'layouts/**/*': '**/*',
+        'partials/**/*': '**/*'
+      }
+    })))
   .build(function(err) {
     if (err) throw err;
     console.log('Build Completed.');
   });
-  
