@@ -11,6 +11,8 @@ const permalinks  = require('metalsmith-permalinks');
 const rootPath = require('metalsmith-rootpath');
 const watch = require('metalsmith-watch');
 
+const sorter = require('./sorter').sorter;
+
 let opts = {};
 let argv = require('yargs').argv;
 
@@ -33,7 +35,19 @@ Metalsmith(__dirname)
       pattern: 'content/guides/*.md'
     },
     Snapcraft: {
-      pattern: 'content/snapcraft/*.md'
+      pattern: 'content/snapcraft/*.md',
+      sortBy: sorter([
+        'Intro',
+        'Get Started',
+        'Your First Snap',
+        'Snapcraft Advanced Features',
+        'Snapcraft Usage',
+        'Snapcraft Parts',
+        'Snapcraft Syntax',
+        'Debug',
+        'Metadata',
+        'Plugins'
+      ])
     }
   }))
   .use(markdown({
