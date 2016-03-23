@@ -1,17 +1,19 @@
-var Metalsmith = require('metalsmith');
-var blc = require('metalsmith-broken-link-checker');
-var collections = require('metalsmith-collections');
-var permalinks  = require('metalsmith-permalinks');
-var markdown = require('metalsmith-markdown');
-var layouts = require('metalsmith-layouts');
-var msIf = require('metalsmith-if');
-var watch = require('metalsmith-watch');
-var rootPath = require('metalsmith-rootpath');
+'use strict';
 
-var opts = {}
+const Metalsmith = require('metalsmith');
+const blc = require('metalsmith-broken-link-checker');
+const collections = require('metalsmith-collections');
+const permalinks  = require('metalsmith-permalinks');
+const markdown = require('metalsmith-markdown');
+const layouts = require('metalsmith-layouts');
+const msIf = require('metalsmith-if');
+const watch = require('metalsmith-watch');
+const rootPath = require('metalsmith-rootpath');
+
+let opts = {}
 opts.watch = false;
 
-var argv = require('yargs').argv;
+let argv = require('yargs').argv;
 if (argv.watch == 'true') {
   opts.watch = argv.watch;
 }
