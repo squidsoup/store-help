@@ -27,3 +27,16 @@ The following task will watch source files and rebuild the site for you:
     make watch
 
 note: A bug with metalsmith-collections currently whereby the Metalsmith object metadata is not correctly purged, may result in duplicate collections rendering while watched.
+
+## Author
+
+Draft documents with the YAML frontmatter `draft` key set to `true` will not be rendered when the site is built, e.g.
+
+```yaml
+---
+title: My Draft Document
+draft: true
+---
+
+# My Draft Document
+```

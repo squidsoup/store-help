@@ -1,6 +1,7 @@
 var Metalsmith = require('metalsmith');
 var blc = require('metalsmith-broken-link-checker');
 var collections = require('metalsmith-collections');
+const drafts = require('metalsmith-drafts');
 var permalinks  = require('metalsmith-permalinks');
 var markdown = require('metalsmith-markdown');
 var layouts = require('metalsmith-layouts');
@@ -20,6 +21,7 @@ Metalsmith(__dirname)
   .source('./src')
   .destination('./build')
   .use(rootPath())
+  .use(drafts())
   .use(collections({
     Home: {
       pattern: ''
