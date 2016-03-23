@@ -6,6 +6,7 @@ const collections = require('metalsmith-collections');
 const drafts = require('metalsmith-drafts');
 const layouts = require('metalsmith-layouts');
 const markdown = require('metalsmith-markdown');
+const nunjucks = require('nunjucks');
 const msIf = require('metalsmith-if');
 const permalinks  = require('metalsmith-permalinks');
 const rootPath = require('metalsmith-rootpath');
@@ -16,6 +17,7 @@ const sorter = require('./sorter').sorter;
 let opts = {};
 let argv = require('yargs').argv;
 
+nunjucks.configure('./templates', {watch: false});
 opts.watch = false;
 
 if (argv.watch == 'true') {
@@ -57,9 +59,10 @@ Metalsmith(__dirname)
     pattern: ':title'
   }))
   .use(layouts({
-    engine: 'handlebars',
-    directory: 'layouts',
-    partials: 'partials'
+    engine: 'nunjucks',
+    default: 'base.html',
+    directory: 'templates',
+    pattern: '**/*.html'
   }))
   .use(blc({warn: true}))
   .use(msIf(
@@ -67,8 +70,7 @@ Metalsmith(__dirname)
     watch({
       paths: {
         '${source}/**/*': '**/*',
-        'layouts/**/*': '**/*',
-        'partials/**/*': '**/*'
+        'templates/**/*': '**/*'
       }
     })))
   .build(function(err) {
