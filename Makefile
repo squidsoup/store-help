@@ -24,7 +24,11 @@ fetch_snapcraft_docs: clean
 	@echo "Annotating snapcraft docs with YAML frontmatter..."
 	@node scripts/frontmatterise.js --path=src/content/snapcraft
 
+serve: build
+	@cd build && python -m SimpleHTTPServer 8000
+	@echo "Serving site at http://localhost:8000"
+
 test:
 	@npm run test
 
-.PHONY: build watch fetch_snapcraft_docs clean test
+.PHONY: build watch fetch_snapcraft_docs clean serve test
