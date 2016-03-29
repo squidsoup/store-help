@@ -20,6 +20,12 @@ This site provides documentation for the [Ubuntu Store](https://myapps.developer
 
     make build
 
+### Snapcraft Docs
+
+Snapcraft docs live in the official ubuntu-core [snapcraft repository](https://github.com/ubuntu-core/snapcraft/), but can be fetched and annotated with the appropriate yaml frontmatter using:
+
+    make fetch_snapcraft_docs
+
 ## Develop
 
 The following task will watch source files and rebuild the site for you:
