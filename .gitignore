@@ -19,4 +19,5 @@ node_modules
 build/
 tmp/
 src/content/snapcraft/
+*.tgz
 

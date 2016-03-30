@@ -1,3 +1,5 @@
+TIP := $(shell git rev-parse HEAD)
+
 build: node_modules 
 	@echo "Running build..."
 	@node build
@@ -27,4 +29,9 @@ fetch_snapcraft_docs: clean
 test:
 	@npm run test
 
-.PHONY: build watch fetch_snapcraft_docs clean test
+tarball: build
+	@echo "Creating tarball ubuntu-store-help-${TIP}.tgz."
+	@cd build && tar -czf ../ubuntu-store-help-${TIP}.tgz .
+	@echo "Done."
+
+.PHONY: build watch fetch_snapcraft_docs clean test tarball
