@@ -2,12 +2,14 @@
 
 const Metalsmith = require('metalsmith');
 const blc = require('metalsmith-broken-link-checker');
+const branch = require('metalsmith-branch');
 const collections = require('metalsmith-collections');
 const drafts = require('metalsmith-drafts');
 const layouts = require('metalsmith-layouts');
 const markdown = require('metalsmith-markdown');
-const nunjucks = require('nunjucks');
+const moment = require('moment');
 const msIf = require('metalsmith-if');
+const nunjucks = require('nunjucks');
 const permalinks  = require('metalsmith-permalinks');
 const rootPath = require('metalsmith-rootpath');
 const watch = require('metalsmith-watch');
@@ -33,10 +35,10 @@ Metalsmith(__dirname)
     Home: {
       pattern: ''
     },
-    Guides: {
+    guides: {
       pattern: 'content/guides/*.md'
     },
-    Snapcraft: {
+    snapcraft: {
       pattern: 'content/snapcraft/*.md',
       sortBy: sorter([
         'Intro',
@@ -55,14 +57,19 @@ Metalsmith(__dirname)
   .use(markdown({
     gfm: true
   }))
-  .use(permalinks({
-    pattern: ':title'
-  }))
+  .use(
+    branch(['!index.html'])
+    .use(permalinks({
+      pattern: ':title',
+      relative: false
+    }))
+  )
   .use(layouts({
     engine: 'nunjucks',
-    default: 'base.html',
+    default: 'index.html',
     directory: 'templates',
-    pattern: '**/*.html'
+    pattern: '**/*.html',
+    moment: moment
   }))
   .use(blc({warn: true}))
   .use(msIf(
