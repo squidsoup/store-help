@@ -27,6 +27,10 @@ fetch_snapcraft_docs: clean
 	@node scripts/frontmatterise.js --path=src/content/snapcraft --layout=index.html
 	@rm -rf tmp
 
+serve: build
+	@cd build && python -m SimpleHTTPServer 8000
+	@echo "Serving site at http://localhost:8000"
+
 test:
 	@npm run test
 
@@ -35,4 +39,4 @@ tarball: build
 	@cd build && tar -czf ../ubuntu-store-help-${TIP}.tgz .
 	@echo "Done."
 
-.PHONY: build watch fetch_snapcraft_docs clean test tarball
+.PHONY: build watch fetch_snapcraft_docs clean serve test tarball
