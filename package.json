@@ -6,6 +6,7 @@
     "async": "^1.5.2",
     "change-case": "^2.3.1",
     "handlebars": "^4.0.5",
+    "highlight.js": "^9.2.0",
     "jasmine-node": "^1.14.5",
     "metalsmith": "^2.1.0",
     "metalsmith-branch": "0.0.4",
