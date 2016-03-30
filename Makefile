@@ -24,7 +24,8 @@ fetch_snapcraft_docs: clean
 	@git clone https://github.com/ubuntu-core/snapcraft/ tmp/snapcraft
 	@cp -r tmp/snapcraft/docs src/content/snapcraft/
 	@echo "Annotating snapcraft docs with YAML frontmatter..."
-	@node scripts/frontmatterise.js --path=src/content/snapcraft
+	@node scripts/frontmatterise.js --path=src/content/snapcraft --layout=index.html
+	@rm -rf tmp
 
 test:
 	@npm run test

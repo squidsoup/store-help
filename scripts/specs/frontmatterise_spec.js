@@ -13,6 +13,13 @@ describe('frontmatterise', function() {
     expect(expected).toEqual(frontmatter);
   });
 
+  it('generates frontmatter with optional keys', function() {
+    let options = {'layout': 'layout.html', 'foo': 'bar'};
+    let frontmatter = fm.generateFrontmatter('a-file', options);
+    let expected = '---\ntitle: A File\nlayout: layout.html\nfoo: bar\n---\n\n';
+    expect(expected).toEqual(frontmatter);
+  });
+
   describe('when parsing a collection of files', function() {
     let result = '';
 
@@ -32,7 +39,7 @@ describe('frontmatterise', function() {
         },
         // annotate temp file
         function(written, string, callback) {;
-          fm.annotateFiles(files, callback);
+          fm.annotateFiles(files, {}, callback);
         },
         // read annotated file contents
         function(callback) {
