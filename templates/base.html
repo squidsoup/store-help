@@ -10,15 +10,15 @@
     <div class="sidebar scrollbar">
       <div class="toc">
         {% for guide in collections.Guides %}
-          <a class="toc__item" href="{{ guide.path }}">{{ guide.title }}</a>
+          <a class="toc__item" href="/{{ guide.path }}">{{ guide.title }}</a>
         {% endfor %}
       </div>
     </div>
     <div class="body">
       <div class="body__container scrollbar">
-        <h1>{{ title }}</h1>
+        <h1 class="body__title">{{ title }}</h1>
         <p>{{ contents | safe }}</p>
-        <div class="footer">
+        <div class="body__foot">
           © 2016 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.
         </div>
       </div>

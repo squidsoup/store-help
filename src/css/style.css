@@ -59,6 +59,7 @@ pre {
   overflow-x: hidden;
   overflow-y: scroll;
   background-color: #fafafa;
+  border-right: 1px solid white;
 }
 
 /* @define toc */
@@ -89,6 +90,10 @@ pre {
   background-color: #fff;
 }
 
+.body__title {
+  margin-top:0;
+}
+
 /* @define scrollbar */
 .scrollbar::-webkit-scrollbar {
   -webkit-appearance: none;
@@ -107,16 +112,4 @@ pre {
 
 .scrollbar::-webkit-scrollbar-track {
   background: transparent;
-}
-
-/* @define footer */
-.footer {
-  position:absolute;
-  bottom:0;
-  left:0;
-  padding: 0 2em;
-  height: 3rem;
-  line-height: 3rem;
-  font-weight:300;
-  font-size:12px;
 }

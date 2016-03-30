@@ -1,5 +1,5 @@
 ---
-layout: index.html
+title: Ubuntu Store Help & Documentation
 ---
 
-Welcome to the Ubuntu Store Help
+Hello
