@@ -9,7 +9,10 @@
     </div>
     <div class="sidebar scrollbar">
       <div class="toc">
-        {% for guide in collections.Guides %}
+        {% for guide in collections.guides %}
+          <a class="toc__item" href="/{{ guide.path }}">{{ guide.title }}</a>
+        {% endfor %}
+        {% for guide in collections.snapcraft %}
           <a class="toc__item" href="/{{ guide.path }}">{{ guide.title }}</a>
         {% endfor %}
       </div>

@@ -35,10 +35,10 @@ Metalsmith(__dirname)
     Home: {
       pattern: ''
     },
-    Guides: {
+    guides: {
       pattern: 'content/guides/*.md'
     },
-    Snapcraft: {
+    snapcraft: {
       pattern: 'content/snapcraft/*.md',
       sortBy: sorter([
         'Intro',
