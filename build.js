@@ -55,7 +55,11 @@ Metalsmith(__dirname)
     }
   }))
   .use(markdown({
-    gfm: true
+    gfm: true,
+    langPrefix: 'hl',
+    highlight: function (code) {
+      return require('highlight.js').highlightAuto(code).value;
+    }
   }))
   .use(
     branch(['!index.html'])
