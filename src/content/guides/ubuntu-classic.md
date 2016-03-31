@@ -47,10 +47,12 @@ Within your project directory, run `snapcraft init` to create a basic snapcraft.
 
 Now you’ll define how your application is built. At the bottom of the snapcraft.yaml file, add the following, replacing your_app_name with the name of your application:
 
+```yaml
     parts:
        your_app_name:
             plugin: make
             source: .
+```
 
 In this example we’ve used make to build the application, specifying that in the plugin field. However, this is not the only way. There are many different plugins for build systems in Snapcraft, and you can see a full list by running `snapcraft list-plugins`.
 
@@ -64,16 +66,18 @@ stage-packages is a list of Ubuntu packages that are installed for the build and
 
 Adding these fields beneath the source field will look something like this:
 
-    parts:
-       your_app_name:
-            plugin: make
-            source: .
-            build-packages:
-                - gcc
-                - libc6-dev
-            stage-packages:
-                - libcurl4-openssl-dev
-                - libgcrypt20-dev
+```yaml
+parts:
+  your_app_name:
+    plugin: make
+    source: .
+    build-packages:
+      - gcc
+      - libc6-dev
+    stage-packages:
+      - libcurl4-openssl-dev
+      - libgcrypt20-dev
+```
 
 Running `snapcraft` again to build your application should succeed. You can run `unsquashfs -l *.snap` to see a listing of the files included in the resulting snap file.
 
