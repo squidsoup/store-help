@@ -1,6 +1,6 @@
 
 :root {
-  font: normal normal 14px/1.7 "Ubuntu", Arial, "libra sans", sans-serif;
+  font: normal normal 16px/1.7 "Ubuntu", Arial, "libra sans", sans-serif;
   height:100%;
   color:#333;
   box-sizing: border-box;
@@ -15,12 +15,30 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #f7f7f7;
 }
 
-pre {
-  overflow: auto;
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 400;
 }
+
+a {
+  color: #dd4814;
+  text-decoration: none;
+}
+
+code {
+  font-family:"Ubuntu mono";
+  border-radius:3px;
+  background-color:#fafafa;
+  padding:0.2em;
+}
+
+pre code {
+  overflow: auto;
+  display:block;
+  padding:0.2em 1em;
+}
+
 
 /* FIXME stephen-stewart use seperate files, concat and csso **/
 /* BEM components */
@@ -42,9 +60,10 @@ pre {
   left: 0;
   right: 0;
   height: 3rem;
-  line-height: 3rem;
+  line-height: 3.4rem;
   box-sizing: border-box;
   background-color:#dd4814;
+  color: white;
   padding: 0 2rem;
 }
 
@@ -58,8 +77,9 @@ pre {
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: scroll;
-  background-color: #fafafa;
   border-right: 1px solid white;
+  font-weight:300;
+  font-size:14px;
 }
 
 /* @define toc */
@@ -67,11 +87,25 @@ pre {
   position: relative;
   width: 21rem;
   min-height: 100%;
-  padding: 2em;
+  background-color: #fafafa;
+  padding-bottom:3rem;
+}
+
+.toc__heading {
+  margin: 0;
+  padding: 0.2em 2rem;
+  font-weight: 400;
 }
 
 .toc__item {
   display:block;
+  color: #333;
+  text-decoration: none;
+  padding: 0.2em 2rem;
+}
+
+.toc__item:hover {
+  background-color:#ddd;
 }
 
 /* @define body */

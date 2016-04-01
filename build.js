@@ -29,17 +29,21 @@ if (argv.watch == 'true') {
 Metalsmith(__dirname)
   .source('./src')
   .destination('./build')
+  .ignore(['.*.swp'])
   .use(rootPath())
   .use(drafts())
   .use(collections({
-    Home: {
-      pattern: ''
-    },
     guides: {
-      pattern: 'content/guides/*.md'
+      pattern: 'content/guides/*.md',
+      metadata: {
+        name: 'Guides'
+      }
     },
     snapcraft: {
       pattern: 'content/snapcraft/*.md',
+      metadata: {
+        name: 'Snapcraft'
+      },
       sortBy: sorter([
         'Intro',
         'Get Started',
