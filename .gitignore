@@ -7,7 +7,8 @@ npm-debug.log*
 build/Release
 
 # Dependency directories
-node_modules
+# node_modules should be re-ignored when https://github.com/npm/npm/issues/4210 is resolved and npm provides first-class support for depedency bundling.
+# node_modules
 
 # Optional npm cache directory
 .npm
