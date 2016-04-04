@@ -11,6 +11,7 @@ const uglify = require('gulp-uglify');
 gulp.task('metalsmith', ['clean'], function (cb) {
   const build = require('./build.js');
   build(cb);
+  // FIXME stephen-stewart 4-Apr-2015 find a better way that doesn't involve deleting the require cache
   delete require.cache[require.resolve('./build.js')];
 });
 
