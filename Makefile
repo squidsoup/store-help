@@ -34,9 +34,9 @@ serve: build
 test:
 	@npm run test
 
-tarball: build
-	@echo "Creating tarball ubuntu-store-help-${TIP}.tgz."
-	@cd build && tar -czf ../ubuntu-store-help-${TIP}.tgz .
+content-tarball: build
+	@echo "Creating content tarball store-help-content-${TIP}.tgz."
+	@cd build && tar -czf ../store-help-content-${TIP}.tgz .
 	@echo "Done."
 
-.PHONY: build watch fetch_snapcraft_docs clean serve test tarball
+.PHONY: build watch fetch_snapcraft_docs clean serve test content-tarball
