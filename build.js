@@ -8,25 +8,17 @@ const drafts = require('metalsmith-drafts');
 const layouts = require('metalsmith-layouts');
 const markdown = require('metalsmith-markdown');
 const moment = require('moment');
-const msIf = require('metalsmith-if');
 const nunjucks = require('nunjucks');
 const permalinks  = require('metalsmith-permalinks');
 const rootPath = require('metalsmith-rootpath');
-const watch = require('metalsmith-watch');
 
 const sorter = require('./sorter').sorter;
 
-let opts = {};
-let argv = require('yargs').argv;
-
 nunjucks.configure('./templates', {watch: false});
-opts.watch = false;
 
-if (argv.watch == 'true') {
-  opts.watch = argv.watch;
-}
-
-Metalsmith(__dirname)
+module.exports = function(callback) {
+  Metalsmith(__dirname)
+  .clean(false) // leave for gulp
   .source('./src')
   .destination('./build')
   .ignore(['.*.swp'])
@@ -80,15 +72,11 @@ Metalsmith(__dirname)
     moment: moment
   }))
   .use(blc({warn: true}))
-  .use(msIf(
-    opts.watch,
-    watch({
-      paths: {
-        '${source}/**/*': '**/*',
-        'templates/**/*': '**/*'
-      }
-    })))
   .build(function(err) {
-    if (err) throw err;
-    console.log('Build Completed.');
+    if (err) {
+      throw new Error(err);
+    } else {
+      return callback(); // let gulp run async
+    }
   });
+};

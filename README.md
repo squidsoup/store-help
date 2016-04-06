@@ -1,7 +1,7 @@
 Ubuntu Store Help Site
 ======================
 
-![Ubuntu](src/img/ubuntu-logo.png)
+![Ubuntu](assets/img/ubuntu-logo.png)
 
 This site provides documentation for the [Ubuntu Store](https://myapps.developer.ubuntu.com).
 
@@ -31,8 +31,6 @@ Snapcraft docs live in the official ubuntu-core [snapcraft repository](https://g
 The following task will watch source files and rebuild the site for you:
 
     make watch
-
-note: A bug with metalsmith-collections currently whereby the Metalsmith object metadata is not correctly purged, may result in duplicate collections rendering while watched.
 
 ## Author
 

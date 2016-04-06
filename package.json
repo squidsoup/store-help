@@ -4,7 +4,14 @@
   "description": "Help and Guides for the Ubuntu Store.",
   "dependencies": {
     "async": "^1.5.2",
+    "autoprefixer": "^6.3.5",
     "change-case": "^2.3.1",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^1.1.0",
+    "gulp-postcss": "^6.1.0",
+    "gulp-uglify": "^1.5.3",
     "handlebars": "^4.0.5",
     "highlight.js": "^9.2.0",
     "jasmine-node": "^1.14.5",
@@ -29,7 +36,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "jasmine-node scripts/specs"
+    "test": "jasmine-node scripts/specs",
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "clean": "gulp clean"
   },
   "author": "Canonical Online Services",
   "repository": "https://github.com/squidsoup/ubuntu-store-help",
