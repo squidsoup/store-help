@@ -85,7 +85,7 @@ pre code {
 /* @define toc */
 .toc {
   position: relative;
-  width: 21rem;
+  width: 17rem;
   min-height: 100%;
   background-color: #fafafa;
   padding-bottom:3rem;
@@ -108,24 +108,40 @@ pre code {
   background-color:#ddd;
 }
 
-/* @define body */
-.body {
+/* @define content */
+.content {
   position: relative;
-  margin-left: 21rem;
+  margin-left: 17rem;
   height: 100%;
 }
 
-.body__container {
+.content__container {
   position: relative;
   height: 100%;
   overflow-y: scroll;
   margin-left: 14px;
-  padding: 2em;
+  padding: 2rem;
   background-color: #fff;
 }
 
-.body__title {
+.content__title {
   margin-top:0;
+}
+
+/* define footer */
+
+.footer {
+  position: absolute;
+  left: 17rem;
+  right: 0;
+  bottom: 0;
+  height: 2rem;
+  padding: 0 2rem;
+  background-color: #fff;
+  font-size: 13px;
+  text-align: center;
+  border-top: 1px solid #fafafa;
+  line-height: 2rem;
 }
 
 /* @define scrollbar */

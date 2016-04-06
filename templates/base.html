@@ -17,14 +17,14 @@
         {% endfor %}
       </div>
     </div>
-    <div class="body">
-      <div class="body__container scrollbar">
-        <h1 class="body__title">{{ title }}</h1>
-        <p>{{ contents | safe }}</p>
-        <div class="body__foot">
-          © {{ moment().format('YYYY') }} Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.
-        </div>
+    <div class="content">
+      <div class="content__container scrollbar">
+        <h1 class="content__title">{{ title }}</h1>
+        {{ contents | safe }}
       </div>
+    </div>
+    <div class="footer">
+      © {{ moment().format('YYYY') }} Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.
     </div>
   </div>
 </html>
