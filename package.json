@@ -8,6 +8,7 @@
     "change-case": "^2.3.1",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.1",
     "gulp-concat": "^2.6.0",
     "gulp-csso": "^1.1.0",
     "gulp-postcss": "^6.1.0",
