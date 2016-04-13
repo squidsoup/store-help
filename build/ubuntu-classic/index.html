@@ -1,0 +1,106 @@
+<html>
+  <meta charset="utf8">
+  <title>Ubuntu Classic</title>
+  <meta name="description" content="Publish your app to Ubuntu Classic">
+  <link rel="stylesheet" type="text/css" href="../../css/all.css">
+  <div class="document">
+    <div class="banner">
+      <img src="/img/ubuntu-logo.svg" height="25" width="107" alt="Ubuntu"> documentation
+    </div>
+    <div class="sidebar scrollbar">
+      <div class="toc">
+        
+        <p class="toc__heading" data-collection-key="guides">Guides</p>
+        
+        <a class="toc__item" href="/ubuntu-classic">Ubuntu Classic</a>
+        
+        
+        <p class="toc__heading" data-collection-key="snapcraft">Snapcraft</p>
+        
+        
+      </div>
+    </div>
+    <div class="content">
+      <div class="content__container scrollbar">
+        <h1 class="content__title">Ubuntu Classic</h1>
+        <h1 id="why-choose-ubuntu">Why choose Ubuntu</h1>
+<p>Ubuntu is used by tens of millions of people every day. Reaching that audience with your app could not be simpler.</p>
+<p>Building and publishing is straightforward and quick. With a few short commands, you’ll bundle your app and dependencies in a snap, available for anyone to access on the Ubuntu Store.</p>
+<p>It doesn’t matter what language you’re using or how specialised your build process is. Ubuntu favours developer flexibility.</p>
+<h1 id="setting-up-your-development-environment">Setting up your development environment</h1>
+<p>You will need an Ubuntu 16.04 environment to build and test your application in before publishing to the Ubuntu Store. If you’re already running Ubuntu, great. You can skip to the next section.</p>
+<p>Following these instructions will set up Ubuntu 16.04 in a VirtualBox virtual machine, but note that the steps will largely be the same in Parallels or VMWare.</p>
+<p>First, download the <a href="http://cdimage.ubuntu.com/ubuntu/daily-live/current/xenial-desktop-amd64.iso">Ubuntu 16.04 image</a>. While you’re waiting for that to finish, <a href="https://www.virtualbox.org/wiki/Downloads">install VirtualBox</a>.</p>
+<p>Launch VirtualBox. It will ask you to create a new virtual machine:</p>
+<ol>
+<li>Call it “Ubuntu” and press continue.</li>
+<li>The default memory size of 768 MB will be sufficient - press continue.</li>
+<li>Leave the option to “create a virtual hard disk now” selected and press continue.</li>
+<li>Leave the default hard disk type selected and press continue.</li>
+<li>Leave “dynamically allocated” storage selected and press continue.</li>
+<li>Change the file size to 16 GB and press create.</li>
+</ol>
+<p>You will be brought back to the main VirtualBox screen. Select the “Ubuntu” virtual machine you just created and press start. It will ask you for a “virtual optical disk file” to boot. Browse to and select the Ubuntu 16.04 image you downloaded.</p>
+<p>The virtual machine will boot and begin installing Ubuntu. Navigate through the language, keyboard, and location choices, then select the option for using the entire disk for Ubuntu.</p>
+<p>Once installation is complete, the virtual machine will reboot into Ubuntu.</p>
+<h1 id="building-your-app">Building your app</h1>
+<p>Open the terminal application by clicking the top-left menu button and searching for it, or by pressing <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>t</kbd>.</p>
+<p>You’ll use a tool called Snapcraft to take the output of your existing build system and bundle metadata around it. This metadata will make your applications discoverable in Ubuntu Store searches and ensure the right binary is called when a user runs your installed application.</p>
+<p>First, install Snapcraft:</p>
+<pre><code>$ sudo apt-<span class="hljs-built_in">get</span> <span class="hljs-keyword">update</span>
+$ sudo apt-<span class="hljs-built_in">get</span> install snapcraft
+</code></pre><p>Within your project directory, run <code>snapcraft init</code> to create a basic snapcraft.yaml file. Open it and set the name, version, summary, and description fields.</p>
+<p>Now you’ll define how your application is built. At the bottom of the snapcraft.yaml file, add the following, replacing your_app_name with the name of your application:</p>
+<pre><code class="hlyaml"><span class="hljs-symbol">    parts:</span>
+<span class="hljs-symbol">       your_app_name:</span>
+<span class="hljs-symbol">            plugin:</span> make
+<span class="hljs-symbol">            source:</span> .
+</code></pre>
+<p>In this example we’ve used make to build the application, specifying that in the plugin field. However, this is not the only way. There are many different plugins for build systems in Snapcraft, and you can see a full list by running <code>snapcraft list-plugins</code>.</p>
+<p>The source field tells Snapcraft where to look for your application’s source code, relative to the current working directory.</p>
+<p>With the initial metadata written, you should try to build your application by running <code>snapcraft</code>. If the build fails, check to see if external libraries or headers need to be installed as part of your build process. You can tell Snapcraft to include these in the build by using the build-packages and stage-packages fields.</p>
+<p>build-packages is a list of Ubuntu packages that need to be installed for the build, but are not included in the final application. An example of this would be GCC, the C compiler.</p>
+<p>stage-packages is a list of Ubuntu packages that are installed for the build and included in the final application. You can look up the correct names for Ubuntu packages at <a href="http://packages.ubuntu.com/">packages.ubuntu.com</a>.</p>
+<p>Adding these fields beneath the source field will look something like this:</p>
+<pre><code class="hlyaml">parts:
+  your_app_name:
+    plugin: make
+    source: .
+    build-packages:
+      -<span class="ruby"> gcc
+</span>      -<span class="ruby"> libc6-dev
+</span>    stage-packages:
+      -<span class="ruby"> libcurl4-openssl-dev
+</span>      -<span class="ruby"> libgcrypt2<span class="hljs-number">0</span>-dev</span>
+</code></pre>
+<p>Running <code>snapcraft</code> again to build your application should succeed. You can run <code>unsquashfs -l *.snap</code> to see a listing of the files included in the resulting snap file.</p>
+<p>By default, all files created by the build are included. To filter this down, you can add some additional rules in the snapcraft.yaml.</p>
+<p>Your snap has all the files needed, but you’ll need to specify the command used to start your app. To do this, add the following apps section to your snapcraft.yaml file:</p>
+<pre><code><span class="hljs-symbol">apps:</span>
+<span class="hljs-symbol">    your_app_name:</span>
+<span class="hljs-symbol">        command:</span> your_app --sample-argument
+</code></pre><p>Run <code>snapcraft</code> again to pick up this change. You can now install and run your snap to make sure it works as expected.</p>
+<h1 id="testing-it-out">Testing it out</h1>
+<p>To see how your app will behave once downloaded from the Ubuntu Store, you’ll need to install some additional software. Open a terminal and run the following commands:</p>
+<pre><code>$ sudo apt-get <span class="hljs-keyword">install</span> ubuntu-snappy
+$ sudo snappy <span class="hljs-keyword">install</span> ubuntu-core
+</code></pre><p>You will now be able to install the snap file you created earlier:</p>
+<pre><code>$ sudo snappy <span class="hljs-keyword">install</span> *.snap
+</code></pre><p>At the time of writing, integration with the graphical application launcher has not been implemented. Instead, you can start your app from the terminal, replacing your_app_name with the value you chose in the snapcraft.yaml file above:</p>
+<pre><code>$ SNAP=<span class="hljs-meta-keyword">/snaps/</span>your_app_name.sideload/current <span class="hljs-meta-keyword">/snaps/</span>your_app_name.sideload<span class="hljs-meta-keyword">/current/</span>command-your_app_name.wrapper
+</code></pre><h1 id="publishing">Publishing</h1>
+<p>Once you are happy with how your application works, you can send it to the Ubuntu Store for publishing.</p>
+<p>If you do not already have an account with Ubuntu One, you’ll need to <a href="https://login.ubuntu.com/">create one</a> and click the validation link in your email before continuing.</p>
+<p>Go to <a href="https://myapps.developer.ubuntu.com/">https://myapps.developer.ubuntu.com/</a> and click the “New package” button.</p>
+<p>You’ll first need to set a “Developer namespace.” This allows more than one developer to use the same name for their application (e.g. calculator.alice and calculator.bob). You also need to specify what country you will be offering your applications from.</p>
+<p>Once you’ve updated your account with those details, you will be able to continue to the next page where you can upload your app. Click the box next to “Your package” and select the snap file you created earlier. Select an appropriate department, application license, and price, then click “Submit to the Store.”</p>
+<h1 id="taking-the-user-s-perspective">Taking the user&#39;s perspective</h1>
+<p>You can now experience how people will find and use your app. Click on the top-left menu button and type Software. Click on the Software app. If you type the name of your application in the search box, it should appear. Congratulations, your app is visible to all of Ubuntu.</p>
+
+      </div>
+    </div>
+    <div class="footer">
+      © 2016 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.
+    </div>
+  </div>
+</html>
